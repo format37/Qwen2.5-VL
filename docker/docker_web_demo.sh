@@ -55,6 +55,7 @@ sudo docker pull ${IMAGE_NAME} || {
 
 sudo docker run --gpus all -d --restart always --name ${CONTAINER_NAME} \
     -v /var/run/docker.sock:/var/run/docker.sock -p ${PORT}:80 \
+    -v ./cache:/root/.cache/ \
     --mount type=bind,source=${QWEN_CHECKPOINT_PATH},target=/data/shared/Qwen/Qwen2.5-VL-Instruct \
     -it ${IMAGE_NAME} \
     python web_demo_mm.py --server-port 80 --server-name 0.0.0.0 -c /data/shared/Qwen/Qwen2.5-VL-Instruct/ && {
